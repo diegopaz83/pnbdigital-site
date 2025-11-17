@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thanks – PNB Digital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primary: #002473;
+      --accent: #00c4a7;
+      --bg: #050816;
+      --text: #f5f7fb;
+      --muted: #9ba4c4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, #07112b, #02030a 55%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .card {
+      max-width: 540px;
+      width: 100%;
+      background: rgba(5, 9, 30, 0.96);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px 24px 20px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+      text-align: left;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #02030a;
+      font-weight: 700;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .highlight {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-main,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      color: #02030a;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 196, 167, 0.35);
+    }
+
+    .btn-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(0, 196, 167, 0.5);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 24, 55, 0.9);
+      color: var(--text);
+    }
+
+    .meta {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-mark">P</div>
+      <div class="logo-text">PNB Digital</div>
+    </div>
+
+    <h1>Thanks for reaching out 🙌</h1>
+    <p>
+      We’ve received your message and will review it carefully. 
+      We’ll get back to you as soon as possible with ideas, questions or next steps.
+    </p>
+
+    <p class="highlight">
+      If your project is urgent, you can reply directly to the confirmation email you just received.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn-main" href="https://pnbdigital.com">
+        ← Back to homepage
+      </a>
+      <a class="btn-ghost" href="mailto:adriana.paz@pnbdigital.com">
+        Contact us directly
+      </a>
+    </div>
+
+    <div class="meta">
+      Built with data, Power Platform and a bit of code.
+    </div>
+  </div>
+</body>
+</html>
