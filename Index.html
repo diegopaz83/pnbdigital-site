@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PNB Digital - Data & AI Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PNB Digital helps companies turn data into decisions using Power BI, analytics and automation." />
+
+  <style>
+    :root {
+      --primary: #002473;
+      --primary-light: #3558b3;
+      --accent: #00c4a7;
+      --bg: #050816;
+      --text: #f5f7fb;
+      --muted: #9ba4c4;
+      --card-bg: #0b1020;
+      --border: #1d2340;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #07112b, #02030a 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* HEADER / NAV */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 4px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #02030a;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      opacity: 0.85;
+    }
+
+    nav a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 32px;
+      padding: 40px 4px 32px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(4, 10, 32, 0.8);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(0, 196, 167, 0.9);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 4vw, 3rem);
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 34rem;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .btn-main,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, var(--accent), var(--primary-light));
+      color: #02030a;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 196, 167, 0.35);
+    }
+
+    .btn-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(0, 196, 167, 0.5);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 24, 55, 0.9);
+      color: var(--text);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .hero-meta span {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(9, 15, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* HERO CARD */
+    .hero-card {
+      background: radial-gradient(circle at top, #18264f, #050816);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+    }
+
+    .hero-chip {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(2, 3, 23, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .kpi {
+      background: rgba(5, 9, 30, 0.9);
+      border-radius: 16px;
+      padding: 10px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .kpi-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .kpi-pill {
+      font-size: 0.7rem;
+      margin-top: 4px;
+      color: #76f5dd;
+    }
+
+    .stack {
+      margin-top: 10px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stack span {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(3, 7, 26, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+    }
+
+    /* SECTION GENERIC */
+    section {
+      padding: 12px 4px 40px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* SERVICES */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .card-tag {
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .card ul {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .card ul li::before {
+      content: "• ";
+      color: var(--accent);
+    }
+
+    /* ABOUT + CONTACT */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .about-text p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .about-highlights span {
+      font-size: 0.8rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--muted);
+    }
+
+    .contact-box {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-box p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #2b3250;
+      background: #050814;
+      color: var(--text);
+      font-size: 0.86rem;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    footer {
+      padding: 20px 4px 28px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 10px;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 840px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 24px;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">P</div>
+        <div>
+          <div>PNB Digital</div>
+          <small style="color: var(--muted); font-size: 0.75rem;">Data • BI • Automation</small>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#projects">Use cases</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div>
+          <div class="hero-tag">
+            <span class="hero-tag-dot"></span>
+            <span>From raw data to clear decisions</span>
+          </div>
+
+          <h1>
+            We design <span>analytics</span> that people
+            actually use.
+          </h1>
+
+          <p class="hero-subtitle">
+            PNB Digital helps teams transform spreadsheets, databases and manual
+            processes into modern dashboards, automation and AI-ready data.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-main" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+              Request a free call →
+            </button>
+            <button class="btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'});">
+              See what we build
+            </button>
+          </div>
+
+          <div class="hero-meta">
+            <span>Power BI & Data Strategy</span>
+            <span>Automation with Microsoft stack</span>
+            <span>English & Spanish</span>
+          </div>
+        </div>
+
+        <!-- Hero side card -->
+        <aside class="hero-card">
+          <div class="hero-card-title">
+            <strong>Executive snapshot</strong>
+            <span class="hero-chip">PNB Digital</span>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi">
+              <div class="kpi-label">Time to insight</div>
+              <div class="kpi-value">-60%</div>
+              <div class="kpi-pill">Typical reduction in report preparation.</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Automation</div>
+              <div class="kpi-value">+40 h</div>
+              <div class="kpi-pill">Hours saved per month with flows & apps.</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Teams</div>
+              <div class="kpi-value">+3</div>
+              <div class="kpi-pill">Areas aligned on one single source of truth.</div>
+            </div>
+          </div>
+
+          <div class="stack">
+            <span>Power BI</span>
+            <span>SQL / Python</span>
+            <span>Power Apps</span>
+            <span>Power Automate</span>
+            <span>Azure / Cloud</span>
+          </div>
+        </aside>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <h2 class="section-title">Services</h2>
+        <p class="section-subtitle">
+          We mix strategy, design and engineering so your dashboards feel clear,
+          fast and aligned with the business.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-tag">Analytics</div>
+            <h3>Executive dashboards in Power BI</h3>
+            <p>
+              End-to-end design of reporting for management, finance, sales or
+              operations.
+            </p>
+            <ul>
+              <li>Modeling data from different systems.</li>
+              <li>KPIs & storytelling for decision makers.</li>
+              <li>Governance, security and documentation.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">Automation</div>
+            <h3>Apps & workflows for your team</h3>
+            <p>
+              Replace spreadsheets and manual steps with apps and flows.
+            </p>
+            <ul>
+              <li>Request & approval apps (Power Apps).</li>
+              <li>Automated flows, alerts and emails.</li>
+              <li>Integration with SharePoint, SQL, APIs.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">AI & data</div>
+            <h3>Data foundations for AI</h3>
+            <p>
+              Prepare your data so you can safely use AI and copilots.
+            </p>
+            <ul>
+              <li>Cleaning and structuring historical data.</li>
+              <li>Data quality checks & monitoring.</li>
+              <li>Practical AI use-cases for your context.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">Enablement</div>
+            <h3>Training for analysts & leaders</h3>
+            <p>
+              Short, focused sessions to help your team read, trust and improve
+              their own analytics.
+            </p>
+            <ul>
+              <li>Power BI for business users.</li>
+              <li>Best practices for self-service BI.</li>
+              <li>1:1 mentoring for internal champions.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- PROJECTS / USE CASES -->
+      <section id="projects">
+        <h2 class="section-title">Sample use-cases</h2>
+        <p class="section-subtitle">
+          A few examples of the type of problems we like to solve.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-tag">Operations</div>
+            <h3>Performance tracking for production line</h3>
+            <p>
+              Flow, downtime, maintenance and quality dashboards connected to
+              your MES or SCADA.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">Finance</div>
+            <h3>Profitability & workload analytics</h3>
+            <p>
+              View workload, billing and forecast per client, project, cluster
+              or BU in a single report.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">Compliance</div>
+            <h3>Environmental & risk dashboards</h3>
+            <p>
+              Track indicators, alerts and action plans for quality, risk and
+              environmental management.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ABOUT + CONTACT -->
+      <section id="about" class="two-col">
+        <div class="about-text">
+          <h2 class="section-title">Why PNB Digital?</h2>
+          <p>
+            We combine engineering, analytics and real business experience. We
+            are used to working with complex realities: different systems,
+            manual processes and teams that are just starting their data
+            journey.
+          </p>
+          <p>
+            Every project is built thinking about adoption: clear KPIs, simple
+            filters, concise views and documentation so your team can own the
+            solution.
+          </p>
+
+          <div class="about-highlights">
+            <span>Power Platform ecosystem</span>
+            <span>Spanish & English delivery</span>
+            <span>Focus on long-term maintainability</span>
+          </div>
+        </div>
+
+        <div id="contact" class="contact-box">
+          <h2 class="section-title">Let’s talk</h2>
+          <p>
+            Share a bit about your context and we’ll get back to you with ideas
+            for a quick win and a possible roadmap.
+          </p>
+
+          <!-- NOTE: this form is visual only. Later we can wire it to Python or a service -->
+          <form>
+            <div>
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Your name" />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@company.com" />
+            </div>
+            <div>
+              <label for="message">Tell us about your project</label>
+              <textarea id="message" placeholder="Short description, goals, systems involved..."></textarea>
+            </div>
+            <button type="button" class="btn-main">
+              Send (demo)
+            </button>
+            <div class="form-note">
+              This demo form does not send emails yet. We can connect it to your
+              Python backend or a mail service when you’re ready.
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> PNB Digital. Built with data, coffee and a bit of
+      code.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
