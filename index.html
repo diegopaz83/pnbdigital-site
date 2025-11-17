@@ -664,28 +664,59 @@
             for a quick win and a possible roadmap.
           </p>
 
-          <!-- NOTE: this form is visual only. Later we can wire it to Python or a service -->
-          <form>
-            <div>
-              <label for="name">Name</label>
-              <input id="name" type="text" placeholder="Your name" />
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@company.com" />
-            </div>
-            <div>
-              <label for="message">Tell us about your project</label>
-              <textarea id="message" placeholder="Short description, goals, systems involved..."></textarea>
-            </div>
-            <button type="button" class="btn-main">
-              Send (demo)
-            </button>
-            <div class="form-note">
-              This is a demo form. In a real website, this would send your
-              message to our team.
-            </div>
-          </form>
+          <!-- FORM: todavía es solo visual, luego conectamos el "action" para mandar correos -->
+          <form
+        id="contact-form"
+        action="https://formspree.io/f/xkgkyerz"
+        method="POST"
+      >
+        <div>
+          <label for="name">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Your name"
+            required
+          />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="you@company.com"
+            required
+          />
+        </div>
+        <div>
+          <label for="message">Tell us about your project</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Short description, goals, systems involved..."
+            required
+          ></textarea>
+        </div>
+
+        <!-- Opcional: asunto personalizado del correo -->
+        <input
+          type="hidden"
+          name="_subject"
+          value="New contact from pnbdigital.com"
+        />
+
+        <button type="submit" class="btn-main">
+          Send
+        </button>
+
+        <div class="form-note">
+          After you send this form, you should receive a confirmation email. We can
+          improve the experience later with a custom “thank you” page.
+        </div>
+      </form>
+
         </div>
       </section>
     </main>
