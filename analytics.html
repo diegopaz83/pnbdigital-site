@@ -1,53 +1,53 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>PNB Digital · Data Analytics Mockup</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Plotly CDN -->
+  <!-- Plotly -->
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
   <style>
     :root {
-      --brand-primary: #002473;
-      --brand-primary-soft: #e0edff;
-      --brand-accent: #38bdf8;
-      --bg-page: #f3f4f6;
-      --bg-card: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #6b7280;
-      --border-subtle: #e5e7eb;
+      --primary: #002473;
+      --primary-light: #3558b3;
+      --accent: #00c4a7;
+      --bg-dark-1: #07112b;
+      --bg-dark-2: #02030a;
+      --card-bg: #0b1020;
+      --card-border: #1d2340;
+      --text-main: #f5f7fb;
+      --text-muted: #9ba4c4;
+      --shadow-card: 0 18px 45px rgba(0, 0, 0, 0.55);
       --radius-xl: 18px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.06);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #e5edff 0, #f9fafb 38%, #edf2ff 80%);
+      background:
+        radial-gradient(circle at top left, var(--bg-dark-1) 0, var(--bg-dark-2) 55%, #000000 90%);
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Nav */
+    /* NAVBAR */
     .top-nav {
       position: sticky;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(90deg, #020617f0, #020617f0);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(90deg, #02030af2, #020617f2);
+      border-bottom: 1px solid #101423;
     }
 
     .top-nav-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0.85rem 1.5rem;
+      padding: 0.9rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -57,520 +57,778 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      color: #e5e7eb;
+      gap: 0.7rem;
     }
 
     .brand-logo {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
-      background: radial-gradient(circle at 20% 0%, #38bdf8, #1d4ed8 55%, #0b1120 100%);
+      background: radial-gradient(circle at 20% 0, var(--accent), var(--primary-light) 50%, #000 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
       font-weight: 700;
-      color: #e5e7eb;
-      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      box-shadow: 0 0 0 1px #1e293b;
     }
 
-    .brand-text-main {
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
+    .brand-title {
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .brand-text-sub {
-      font-size: 0.75rem;
-      color: #9ca3af;
+    .brand-subtitle {
+      font-size: 0.7rem;
+      color: var(--text-muted);
     }
 
-    .nav-actions {
+    .nav-right {
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
     .nav-pill {
-      font-size: 0.78rem;
-      color: #e5e7eb;
-      padding: 0.3rem 0.75rem;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.9rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.2));
+      border: 1px solid #1d2340;
+      background: radial-gradient(circle at top left, #0b1020, #020617);
+      color: var(--text-muted);
       display: flex;
       align-items: center;
       gap: 0.35rem;
     }
 
-    .nav-cta {
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 0.4rem 0.9rem;
+    .nav-pill-dot {
+      width: 8px;
+      height: 8px;
       border-radius: 999px;
-      border: 0;
-      color: #0f172a;
-      background: linear-gradient(135deg, #f9fafb, #e5edff);
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0, 196, 167, 0.18);
     }
 
-    .nav-cta span.icon {
+    .btn-cta {
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      border: 0;
+      cursor: pointer;
+      color: #020617;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65);
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .btn-cta span.icon {
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: #0f172a;
-      color: #e5e7eb;
-      font-size: 0.7rem;
-    }
-
-    /* Page Shell */
-    .page-shell {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.8rem 1.5rem 3rem;
-    }
-
-    .page-header {
+      background: #020617;
+      color: var(--accent);
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: flex-end;
-      margin-bottom: 1.5rem;
-    }
-
-    .page-title-block h1 {
-      margin: 0 0 0.35rem;
-      font-size: 1.6rem;
-      letter-spacing: 0.02em;
-    }
-
-    .page-title-block p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 520px;
-    }
-
-    .page-title-block p strong {
-      color: var(--brand-primary);
-    }
-
-    .time-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      justify-content: flex-end;
-    }
-
-    .time-chip {
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.85);
-      cursor: pointer;
-    }
-
-    .time-chip--active {
-      background: #0f172a;
-      color: #f9fafb;
-      border-color: #0f172a;
-    }
-
-    /* KPI Grid */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.7rem;
-    }
-
-    .kpi-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-xl);
-      padding: 0.9rem 1.05rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(209, 213, 219, 0.7);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .kpi-badge {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .kpi-value-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 0.25rem;
-    }
-
-    .kpi-value {
-      font-size: 1.45rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .kpi-unit {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-left: 0.15rem;
-    }
-
-    .kpi-trend {
-      font-size: 0.78rem;
-      font-weight: 500;
-      display: inline-flex;
       align-items: center;
-      gap: 0.2rem;
-      padding: 0.15rem 0.5rem;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    /* NEW: ghost back button */
+    .btn-ghost {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.9rem;
       border-radius: 999px;
-      background: #ecfdf3;
-      color: #15803d;
-    }
-
-    .kpi-trend--down {
-      background: #fef2f2;
-      color: #b91c1c;
-    }
-
-    .kpi-footnote {
-      margin-top: 0.35rem;
-      font-size: 0.74rem;
+      border: 1px solid #1d2340;
+      background: transparent;
       color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-
-    .kpi-highlight {
-      position: absolute;
-      inset: auto -25px -40px auto;
-      width: 100px;
-      height: 100px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
-      pointer-events: none;
-    }
-
-    /* Main Grid */
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.35fr);
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .panel {
-      background: var(--bg-card);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(209, 213, 219, 0.7);
-      padding: 1rem 1.1rem 1rem;
-      display: flex;
-      flex-direction: column;
-      min-height: 220px;
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 0.65rem;
-      gap: 0.5rem;
-    }
-
-    .panel-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: #111827;
-    }
-
-    .panel-subtitle {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .panel-legend {
-      font-size: 0.72rem;
-      display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .legend-pill {
+      cursor: pointer;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
     }
 
-    .legend-color {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: #d1d5db;
+    .btn-ghost:hover {
+      background: #020617;
+      color: var(--text-main);
     }
 
-    .legend-label {
+    /* SHELL */
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.7rem 1.5rem 2.5rem;
+    }
+
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .title-block h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title-block p {
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.4rem;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #1d2340;
+      background: #020617;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .pill--active {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fefefe;
+      border-color: transparent;
+    }
+
+    .date-range {
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
-    .chart {
-      flex: 1;
-      min-height: 230px;
-    }
-
-    /* Second row grid */
-    .lower-grid {
+    /* KPI CARDS */
+    .kpi-row {
       display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.6fr);
+      grid-template-columns: 1.6fr 1.2fr;
       gap: 1rem;
+      margin-bottom: 1rem;
     }
 
-    /* Table */
-    .table-wrapper {
-      flex: 1;
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-card);
+      padding: 0.9rem 1.1rem;
+      position: relative;
       overflow: hidden;
     }
 
-    table.data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.78rem;
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
-    .data-table thead {
-      background: #f9fafb;
-    }
-
-    .data-table th,
-    .data-table td {
-      padding: 0.5rem 0.6rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border-subtle);
-      white-space: nowrap;
-    }
-
-    .data-table th {
-      font-weight: 600;
-      color: #4b5563;
-    }
-
-    .data-table tbody tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .data-table tbody tr:nth-child(even) {
-      background: #f9fafb;
+    .card-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
     }
 
     .badge-soft {
-      padding: 0.18rem 0.5rem;
+      font-size: 0.68rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 999px;
-      font-size: 0.72rem;
-      background: var(--brand-primary-soft);
-      color: var(--brand-primary);
+      border: 1px solid #1d2340;
+      background: #020617;
+      color: var(--text-muted);
     }
 
-    .badge-soft--green {
-      background: #dcfce7;
-      color: #166534;
+    .kpi-value-block {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.4rem;
     }
 
-    .badge-soft--amber {
-      background: #fef9c3;
-      color: #92400e;
+    .kpi-value {
+      font-size: 1.7rem;
+      font-weight: 600;
     }
 
-    .trend-chip {
-      font-size: 0.72rem;
-      color: #64748b;
+    .kpi-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
 
-    .trend-chip strong {
-      color: #0f172a;
-    }
-
-    /* Footer */
-    .page-footer {
-      margin-top: 1.5rem;
+    .kpi-trend {
       font-size: 0.75rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(0, 196, 167, 0.12);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .kpi-trend--down {
+      background: rgba(248, 113, 113, 0.12);
+      color: #fca5a5;
+      border-color: rgba(248, 113, 113, 0.5);
+    }
+
+    .card-glow {
+      position: absolute;
+      inset: auto -60px -80px auto;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(0, 196, 167, 0.16), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* GAUGES */
+    .gauges-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .gauge-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .gauge-container {
+      height: 120px;
+    }
+
+    /* CHART GRIDS */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1.7fr 1.3fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .chart-box {
+      margin-top: 0.3rem;
+      height: 260px;
+    }
+
+    .charts-grid-bottom {
+      display: grid;
+      grid-template-columns: 1.4fr 1.6fr;
+      gap: 1rem;
+    }
+
+    .chart-box-bottom {
+      margin-top: 0.25rem;
+      height: 240px;
+    }
+
+    .table-wrapper {
+      margin-top: 0.4rem;
+      max-height: 240px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+    }
+
+    th,
+    td {
+      padding: 0.45rem 0.55rem;
+      text-align: left;
+      border-bottom: 1px solid #111827;
+      white-space: nowrap;
+    }
+
+    thead {
+      background: #020617;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    .badge-status {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(22, 163, 74, 0.6);
+      color: #4ade80;
+      background: rgba(22, 163, 74, 0.15);
+    }
+
+    .badge-status--risk {
+      border-color: rgba(239, 68, 68, 0.7);
+      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    .footer {
+      margin-top: 1.3rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       display: flex;
       justify-content: space-between;
       gap: 0.75rem;
-      align-items: center;
+      flex-wrap: wrap;
     }
 
     .footer-pill {
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.7rem;
       border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.75);
-      font-size: 0.72rem;
+      border: 1px dashed #1d2340;
+      background: rgba(2, 6, 23, 0.9);
     }
 
-    /* Responsive */
+    /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .kpi-grid {
+      .kpi-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .charts-grid,
+      .charts-grid-bottom {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .gauges-row {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .dashboard-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .lower-grid {
-        grid-template-columns: minmax(0, 1fr);
       }
     }
 
     @media (max-width: 720px) {
-      .page-shell {
+      .shell {
         padding-inline: 1rem;
-      }
-
-      .kpi-grid {
-        grid-template-columns: minmax(0, 1fr);
       }
 
       .top-nav-inner {
         padding-inline: 1rem;
       }
 
-      .nav-actions {
+      .nav-right {
         display: none;
       }
-    }
 
+      .gauges-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Top Navigation -->
+  <!-- NAVBAR -->
   <header class="top-nav">
     <div class="top-nav-inner">
       <div class="brand">
-        <div class="brand-logo">P</div>
+        <div class="brand-logo">PN</div>
         <div>
-          <div class="brand-text-main">PNB Digital</div>
-          <div class="brand-text-sub">Data &amp; AI Studio</div>
+          <div class="brand-title">PNB Digital</div>
+          <div class="brand-subtitle">Data &amp; AI for real decisions</div>
         </div>
       </div>
-      <div class="nav-actions">
+      <div class="nav-right">
+        <!-- NEW back button -->
+        <a href="https://pnbdigital.com" class="btn-ghost">
+          ← Back to main site
+        </a>
         <div class="nav-pill">
-          <span>●</span> Realtime demo (mock)
+          <span class="nav-pill-dot"></span>
+          Dashboard demo · Mockup
         </div>
-        <button class="nav-cta">
+        <button class="btn-cta">
           <span class="icon">▶</span>
-          Live analytics walkthrough
+          Watch guided tour
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Page Content -->
-  <main class="page-shell">
-    <!-- Header -->
-    <section class="page-header">
-      <div class="page-title-block">
-        <h1>Analytics overview · Performance board</h1>
+  <!-- CONTENT -->
+  <main class="shell">
+    <!-- HEADER -->
+    <section class="header-row">
+      <div class="title-block">
+        <h1>Analytics board · Contact center</h1>
         <p>
-          Panel de <strong>análisis de datos</strong> con métricas clave,
-          visuales de Plotly y una vista ejecutiva para clientes de consultoría
-          en transformación digital.
+          Executive view to monitor activity, conversion and service quality in a
+          <strong>data analytics</strong> dashboard powered by Plotly, ready to plug into your real sources.
         </p>
       </div>
-      <div class="time-filters">
-        <button class="time-chip time-chip--active">Last 30 days</button>
-        <button class="time-chip">Quarter</button>
-        <button class="time-chip">YTD</button>
-        <button class="time-chip">All time</button>
+      <div class="filter-row">
+        <div class="filter-pills">
+          <button class="pill">Daily KPIs</button>
+          <button class="pill">Last 7 days</button>
+          <button class="pill pill--active">Last 30 days</button>
+          <button class="pill">Current month</button>
+        </div>
+        <div class="date-range">
+          Mock range: 10/06/2025 → 11/04/2025
+        </div>
       </div>
     </section>
 
-    <!-- KPI Cards -->
-    <section class="kpi-grid">
-      <article class="kpi-card">
-        <div class="kpi-badge">Total revenue</div>
-        <div class="kpi-value-row">
+    <!-- MAIN KPIs -->
+    <section class="kpi-row">
+      <article class="card">
+        <div class="card-header">
           <div>
-            <span class="kpi-value">$842K</span>
-            <span class="kpi-unit">USD</span>
+            <div class="card-title">Total calls</div>
           </div>
-          <span class="kpi-trend">
-            ↑ 12.4% <span style="opacity:0.75;">vs. last 30d</span>
-          </span>
+          <span class="badge-soft">Inbound + outbound</span>
         </div>
-        <div class="kpi-footnote">
-          <span>Enterprise · 63% del total</span>
-          <span class="trend-chip"><strong>+18</strong> deals cerrados</span>
+        <div class="kpi-value-block">
+          <div>
+            <div class="kpi-value">541</div>
+            <div class="kpi-label">interactions in the last 30 days</div>
+          </div>
+          <div class="kpi-trend">
+            ▲ 12.8% <span style="opacity:0.7;">vs. previous period</span>
+          </div>
         </div>
-        <div class="kpi-highlight"></div>
+        <div class="card-glow"></div>
       </article>
 
-      <article class="kpi-card">
-        <div class="kpi-badge">Conversion rate</div>
-        <div class="kpi-value-row">
+      <article class="card">
+        <div class="card-header">
           <div>
-            <span class="kpi-value">27.8%</span>
+            <div class="card-title">Qualified leads</div>
           </div>
-          <span class="kpi-trend">
-            ↑ 3.2 pts
-          </span>
+          <span class="badge-soft">Res + Cap</span>
         </div>
-        <div class="kpi-footnote">
-          <span>From qualified to closed won</span>
-          <span class="trend-chip">Benchmark: 22–25%</span>
+        <div class="kpi-value-block">
+          <div>
+            <div class="kpi-value">23</div>
+            <div class="kpi-label">4.3 % qualification rate</div>
+          </div>
+          <div class="kpi-trend kpi-trend--down">
+            ▼ 1.1 pts <span style="opacity:0.7;">vs. last month</span>
+          </div>
         </div>
-        <div class="kpi-highlight"></div>
+        <div class="card-glow"></div>
+      </article>
+    </section>
+
+    <!-- GAUGES -->
+    <section class="gauges-row">
+      <article class="card">
+        <div class="gauge-title">Outcome "yes"</div>
+        <div id="gauge-resultado" class="gauge-container"></div>
+      </article>
+      <article class="card">
+        <div class="gauge-title">Need "yes"</div>
+        <div id="gauge-necesidad" class="gauge-container"></div>
+      </article>
+      <article class="card">
+        <div class="gauge-title">Desire "yes"</div>
+        <div id="gauge-deseo" class="gauge-container"></div>
+      </article>
+      <article class="card">
+        <div class="gauge-title">Capacity "yes"</div>
+        <div id="gauge-capacidad" class="gauge-container"></div>
+      </article>
+    </section>
+
+    <!-- TOP CHARTS -->
+    <section class="charts-grid">
+      <!-- Calls per day -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-title">Calls per day &amp; average</div>
+          <span class="badge-soft">Mock · Plotly line</span>
+        </div>
+        <div id="chart-llamadas" class="chart-box"></div>
       </article>
 
-      <article class="kpi-card">
-        <div class="kpi-badge">Active projects</div>
-        <div class="kpi-value-row">
-          <div>
-            <span class="kpi-value">34</span>
-          </div>
-          <span class="kpi-trend kpi-trend--down">
-            ↓ 2 en riesgo
-          </span>
+      <!-- Donut -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-title">Distribution by channel</div>
+          <span class="badge-soft">Donut chart</span>
         </div>
-        <div class="kpi-footnote">
-          <span>On track: 29 · At risk: 5</span>
-          <span class="trend-chip">Load por célula balanceado</span>
+        <div id="chart-donut" class="chart-box"></div>
+      </article>
+    </section>
+
+    <!-- BOTTOM CHART + TABLE -->
+    <section class="charts-grid-bottom">
+      <!-- Agent ranking -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-title">Agent ranking (calls)</div>
+          <span class="badge-soft">Bar chart</span>
         </div>
-        <div class="kpi-highlight"></div>
+        <div id="chart-ranking" class="chart-box-bottom"></div>
       </article>
 
-      <article class="kpi-card">
-        <div class="kpi-badge">Customer satisfaction</div>
-        <div class="kpi-value-row">
-          <div>
-            <span class="kpi-value">89</span>
-            <span class="kpi-unit">/100 NPS-like</span>
-          </div>
-          <span class="kpi-trend">
-            ↑ +4 pts
-          </span>
+      <!-- Customers table -->
+      <article class="card">
+        <div class="card-header">
+          <div class="card-title">Top contacted customers</div>
+          <span class="badge-soft">Mock table</span>
         </div>
-        <div class="kpi-footnote">
-          <span>Promedio de últimos 12 proyectos</span>
-          <span class="trend-chip">Goal: ≥ 85</span>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Customer</th>
+                <th>Segment</th>
+                <th>Calls</th>
+                <th>Conversion</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>NovaTech Industries</td>
+                <td>Enterprise</td>
+                <td>112</td>
+                <td>18.2%</td>
+                <td><span class="badge-status">On track</span></td>
+              </tr>
+              <tr>
+                <td>02</td>
+                <td>GreenField Health</td>
+                <td>Healthcare</td>
+                <td>89</td>
+                <td>15.9%</td>
+                <td><span class="badge-status">On track</span></td>
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>UrbanLogix Group</td>
+                <td>Smart city</td>
+                <td>67</td>
+                <td>9.4%</td>
+                <td><span class="badge-status badge-status--risk">At risk</span></td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>BlueOcean Retail</td>
+                <td>Retail</td>
+                <td>54</td>
+                <td>12.1%</td>
+                <td><span class="badge-status">On track</span></td>
+              </tr>
+              <tr>
+                <td>05</td>
+                <td>Skyline Logistics</td>
+                <td>Logistics</td>
+                <td>49</td>
+                <td>8.7%</td>
+                <td><span class="badge-status">Monitor</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>
+        PNB Digital mockup · all numbers are fictitious and only illustrate layout and style.
+      </span>
+      <span class="footer-pill">
+        Designed to connect with your APIs, data warehouse or Power BI exports.
+      </span>
+    </footer>
+  </main>
+
+  <!-- PLOTLY SCRIPTS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const primary = "#002473";
+      const primaryLight = "#3558b3";
+      const accent = "#00c4a7";
+      const textMain = "#f5f7fb";
+      const gridColor = "#1d2340";
+
+      const baseLayout = {
+        paper_bgcolor: "rgba(0,0,0,0)",
+        plot_bgcolor: "rgba(0,0,0,0)",
+        font: {
+          family: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+          color: textMain
+        },
+        margin: { t: 20, r: 20, b: 35, l: 40 }
+      };
+
+      const config = {
+        responsive: true,
+        displayModeBar: false
+      };
+
+      /* GAUGES (semi circle) */
+      function buildGauge(id, value, max) {
+        const data = [{
+          type: "indicator",
+          mode: "gauge+number",
+          value: value,
+          number: { suffix: "", font: { size: 20 } },
+          gauge: {
+            axis: { range: [0, max], tickwidth: 0, tickcolor: "#4b5563" },
+            bar: { color: accent },
+            bgcolor: "rgba(0,0,0,0)",
+            borderwidth: 0,
+            bordercolor: "transparent",
+            steps: [
+              { range: [0, max * 0.5], color: "rgba(53,88,179,0.25)" },
+              { range: [max * 0.5, max * 0.8], color: "rgba(0,196,167,0.25)" },
+              { range: [max * 0.8, max], color: "rgba(0,196,167,0.4)" }
+            ],
+            startangle: -90,
+            endangle: 90
+          },
+          domain: { x: [0, 1], y: [0, 1] }
+        }];
+
+        const layout = {
+          ...baseLayout,
+          margin: { t: 0, r: 0, b: 0, l: 0 },
+          height: 120
+        };
+
+        Plotly.newPlot(id, data, layout, config);
+      }
+
+      buildGauge("gauge-resultado", 23, 60);
+      buildGauge("gauge-necesidad", 291, 400);
+      buildGauge("gauge-deseo", 66, 120);
+      buildGauge("gauge-capacidad", 46, 100);
+
+      /* LINE CHART: CALLS PER DAY */
+      const days = [
+        "10/07", "10/10", "10/13", "10/16", "10/19",
+        "10/22", "10/25", "10/28", "10/31", "11/03"
+      ];
+      const calls = [34, 27, 39, 31, 28, 36, 42, 29, 33, 51];
+      const avg = [30, 30, 30, 31, 31, 32, 32, 33, 33, 34];
+
+      const traceCalls = {
+        x: days,
+        y: calls,
+        type: "scatter",
+        mode: "lines+markers",
+        name: "Calls",
+        line: { color: accent, width: 3, shape: "spline", smoothing: 0.6 },
+        marker: { size: 6 },
+        hovertemplate: "%{x}<br>%{y} calls<extra></extra>"
+      };
+
+      const traceAvg = {
+        x: days,
+        y: avg,
+        type: "scatter",
+        mode: "lines",
+        name: "Average",
+        line: { color: primaryLight, width: 2, dash: "dot" },
+        hovertemplate: "%{x}<br>%{y} avg calls<extra></extra>"
+      };
+
+      const layoutCalls = {
+        ...baseLayout,
+        legend: { orientation: "h", y: 1.15, x: 0 },
+        yaxis: {
+          title: "Calls",
+          gridcolor: gridColor
+        },
+        xaxis: {
+          tickangle: -30
+        }
+      };
+
+      Plotly.newPlot("chart-llamadas", [traceCalls, traceAvg], layoutCalls, config);
+
+      /* DONUT: CHANNEL DISTRIBUTION */
+      const donutData = [{
+        values: [48, 27, 15, 10],
+        labels: ["Phone", "WhatsApp", "Email", "Web chat"],
+        type: "pie",
+        hole: 0.65,
+        marker: {
+          colors: [accent, primaryLight, "#1e40af", "#64748b"]
+        },
+        textinfo: "label+percent",
+        textposition: "inside",
+        insidetextorientation: "radial",
+        hovertemplate: "%{label}<br>%{value} calls<extra></extra>"
+      }];
+
+      const layoutDonut = {
+        ...baseLayout,
+        margin: { t: 10, r: 10, b: 10, l: 10 },
+        showlegend: false
+      };
+
+      Plotly.newPlot("chart-donut", donutData, layoutDonut, config);
+
+      /* BAR: AGENT RANKING */
+      const agents = ["Alicia Montalban", "Juan Cruz", "Miguel Mori", "Support team"];
+      const agentCalls = [520, 210, 190, 165];
+
+      const rankingData = [{
+        x: agents,
+        y: agentCalls,
+        type: "bar",
+        marker: {
+          color: primaryLight,
+          line: { color: "#020617", width: 1 }
+        },
+        hovertemplate: "%{x}<br>%{y} calls<extra></extra>"
+      }];
+
+      const layoutRanking = {
+        ...baseLayout,
+        yaxis: {
+          title: "Calls",
+          gridcolor: gridColor
+        },
+        xaxis: {
+          tickfont: { size: 10 }
+        }
+      };
+
+      Plotly.newPlot("chart-ranking", rankingData, layoutRanking, config);
+    });
+  </script>
+</body>
+</html>
