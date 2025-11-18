@@ -488,6 +488,10 @@
             <button class="btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'});">
               See what we build
             </button>
+            <!-- NEW BUTTON TO ANALYTICS DASHBOARD -->
+            <a href="/analytics/" class="btn-ghost">
+              View analytics dashboard
+            </a>
           </div>
 
           <div class="hero-meta">
@@ -664,62 +668,62 @@
             for a quick win and a possible roadmap.
           </p>
 
-          <!-- FORM: todavía es solo visual, luego conectamos el "action" para mandar correos -->
+          <!-- FORM: visual for now, then we can wire it to send emails -->
           <form
-        id="contact-form"
-        action="https://formspree.io/f/xkgkyerz"
-        method="POST"
-      >
-        <input
-        type="hidden"
-        name="_next"
-        value="https://pnbdigital.com/thanks.html"
-      />
-        <div>
-          <label for="name">Name</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Your name"
-            required
-          />
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="you@company.com"
-            required
-          />
-        </div>
-        <div>
-          <label for="message">Tell us about your project</label>
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Short description, goals, systems involved..."
-            required
-          ></textarea>
-        </div>
+            id="contact-form"
+            action="https://formspree.io/f/xkgkyerz"
+            method="POST"
+          >
+            <input
+              type="hidden"
+              name="_next"
+              value="https://pnbdigital.com/thanks.html"
+            />
+            <div>
+              <label for="name">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                required
+              />
+            </div>
+            <div>
+              <label for="message">Tell us about your project</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Short description, goals, systems involved..."
+                required
+              ></textarea>
+            </div>
 
-        <!-- Opcional: asunto personalizado del correo -->
-        <input
-          type="hidden"
-          name="_subject"
-          value="New contact from pnbdigital.com"
-        />
+            <!-- Optional: custom subject for the email -->
+            <input
+              type="hidden"
+              name="_subject"
+              value="New contact from pnbdigital.com"
+            />
 
-        <button type="submit" class="btn-main">
-          Send
-        </button>
+            <button type="submit" class="btn-main">
+              Send
+            </button>
 
-        <div class="form-note">
-          After you send this form you will be redirected to a thank you page.
-        </div>
-      </form>
+            <div class="form-note">
+              After you send this form you will be redirected to a thank you page.
+            </div>
+          </form>
 
         </div>
       </section>
