@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>PNB Digital · Data Analytics Mockup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Plotly CDN -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+  <style>
+    :root {
+      --brand-primary: #002473;
+      --brand-primary-soft: #e0edff;
+      --brand-accent: #38bdf8;
+      --bg-page: #f3f4f6;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border-subtle: #e5e7eb;
+      --radius-xl: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e5edff 0, #f9fafb 38%, #edf2ff 80%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(90deg, #020617f0, #020617f0);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .top-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #e5e7eb;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 0%, #38bdf8, #1d4ed8 55%, #0b1120 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #e5e7eb;
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35);
+    }
+
+    .brand-text-main {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+    }
+
+    .brand-text-sub {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-pill {
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.2));
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 0;
+      color: #0f172a;
+      background: linear-gradient(135deg, #f9fafb, #e5edff);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-cta span.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #0f172a;
+      color: #e5e7eb;
+      font-size: 0.7rem;
+    }
+
+    /* Page Shell */
+    .page-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.8rem 1.5rem 3rem;
+    }
+
+    .page-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-title-block h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .page-title-block p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .page-title-block p strong {
+      color: var(--brand-primary);
+    }
+
+    .time-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: flex-end;
+    }
+
+    .time-chip {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+    }
+
+    .time-chip--active {
+      background: #0f172a;
+      color: #f9fafb;
+      border-color: #0f172a;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: 0.9rem 1.05rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(209, 213, 219, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .kpi-value-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.25rem;
+    }
+
+    .kpi-value {
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .kpi-unit {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 0.15rem;
+    }
+
+    .kpi-trend {
+      font-size: 0.78rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: #ecfdf3;
+      color: #15803d;
+    }
+
+    .kpi-trend--down {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .kpi-footnote {
+      margin-top: 0.35rem;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .kpi-highlight {
+      position: absolute;
+      inset: auto -25px -40px auto;
+      width: 100px;
+      height: 100px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Main Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.35fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(209, 213, 219, 0.7);
+      padding: 1rem 1.1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 0.65rem;
+      gap: 0.5rem;
+    }
+
+    .panel-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #111827;
+    }
+
+    .panel-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .panel-legend {
+      font-size: 0.72rem;
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .legend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .legend-color {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #d1d5db;
+    }
+
+    .legend-label {
+      color: var(--text-muted);
+    }
+
+    .chart {
+      flex: 1;
+      min-height: 230px;
+    }
+
+    /* Second row grid */
+    .lower-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.6fr);
+      gap: 1rem;
+    }
+
+    /* Table */
+    .table-wrapper {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+
+    .data-table thead {
+      background: #f9fafb;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 0.5rem 0.6rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .data-table th {
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .data-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .data-table tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .badge-soft {
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: var(--brand-primary-soft);
+      color: var(--brand-primary);
+    }
+
+    .badge-soft--green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-soft--amber {
+      background: #fef9c3;
+      color: #92400e;
+    }
+
+    .trend-chip {
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+
+    .trend-chip strong {
+      color: #0f172a;
+    }
+
+    /* Footer */
+    .page-footer {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .footer-pill {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.75);
+      font-size: 0.72rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .lower-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell {
+        padding-inline: 1rem;
+      }
+
+      .kpi-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .top-nav-inner {
+        padding-inline: 1rem;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <div class="brand">
+        <div class="brand-logo">P</div>
+        <div>
+          <div class="brand-text-main">PNB Digital</div>
+          <div class="brand-text-sub">Data &amp; AI Studio</div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-pill">
+          <span>●</span> Realtime demo (mock)
+        </div>
+        <button class="nav-cta">
+          <span class="icon">▶</span>
+          Live analytics walkthrough
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page-shell">
+    <!-- Header -->
+    <section class="page-header">
+      <div class="page-title-block">
+        <h1>Analytics overview · Performance board</h1>
+        <p>
+          Panel de <strong>análisis de datos</strong> con métricas clave,
+          visuales de Plotly y una vista ejecutiva para clientes de consultoría
+          en transformación digital.
+        </p>
+      </div>
+      <div class="time-filters">
+        <button class="time-chip time-chip--active">Last 30 days</button>
+        <button class="time-chip">Quarter</button>
+        <button class="time-chip">YTD</button>
+        <button class="time-chip">All time</button>
+      </div>
+    </section>
+
+    <!-- KPI Cards -->
+    <section class="kpi-grid">
+      <article class="kpi-card">
+        <div class="kpi-badge">Total revenue</div>
+        <div class="kpi-value-row">
+          <div>
+            <span class="kpi-value">$842K</span>
+            <span class="kpi-unit">USD</span>
+          </div>
+          <span class="kpi-trend">
+            ↑ 12.4% <span style="opacity:0.75;">vs. last 30d</span>
+          </span>
+        </div>
+        <div class="kpi-footnote">
+          <span>Enterprise · 63% del total</span>
+          <span class="trend-chip"><strong>+18</strong> deals cerrados</span>
+        </div>
+        <div class="kpi-highlight"></div>
+      </article>
+
+      <article class="kpi-card">
+        <div class="kpi-badge">Conversion rate</div>
+        <div class="kpi-value-row">
+          <div>
+            <span class="kpi-value">27.8%</span>
+          </div>
+          <span class="kpi-trend">
+            ↑ 3.2 pts
+          </span>
+        </div>
+        <div class="kpi-footnote">
+          <span>From qualified to closed won</span>
+          <span class="trend-chip">Benchmark: 22–25%</span>
+        </div>
+        <div class="kpi-highlight"></div>
+      </article>
+
+      <article class="kpi-card">
+        <div class="kpi-badge">Active projects</div>
+        <div class="kpi-value-row">
+          <div>
+            <span class="kpi-value">34</span>
+          </div>
+          <span class="kpi-trend kpi-trend--down">
+            ↓ 2 en riesgo
+          </span>
+        </div>
+        <div class="kpi-footnote">
+          <span>On track: 29 · At risk: 5</span>
+          <span class="trend-chip">Load por célula balanceado</span>
+        </div>
+        <div class="kpi-highlight"></div>
+      </article>
+
+      <article class="kpi-card">
+        <div class="kpi-badge">Customer satisfaction</div>
+        <div class="kpi-value-row">
+          <div>
+            <span class="kpi-value">89</span>
+            <span class="kpi-unit">/100 NPS-like</span>
+          </div>
+          <span class="kpi-trend">
+            ↑ +4 pts
+          </span>
+        </div>
+        <div class="kpi-footnote">
+          <span>Promedio de últimos 12 proyectos</span>
+          <span class="trend-chip">Goal: ≥ 85</span>
