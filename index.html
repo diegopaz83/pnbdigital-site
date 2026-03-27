@@ -5,6 +5,7 @@
   <title>PNB Digital - Data & AI Solutions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="PNB Digital helps companies turn data into decisions using Power BI, analytics and automation." />
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 
   <style>
     :root {
@@ -444,6 +445,13 @@
   </style>
 </head>
 <body>
+  <script type="module">
+  	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+  
+  	createChat({
+  		webhookUrl: 'https://mateobedoya.app.n8n.cloud/webhook/9129b2c9-c591-40d0-9955-5cda85c06ad9/chat'
+  	});
+  </script>
   <div class="page">
     <header>
       <div class="logo">
