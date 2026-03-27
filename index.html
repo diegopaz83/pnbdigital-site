@@ -449,7 +449,20 @@
   	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
   
   	createChat({
-  		webhookUrl: 'https://mateobedoya.app.n8n.cloud/webhook/9129b2c9-c591-40d0-9955-5cda85c06ad9/chat'
+  		webhookUrl: 'https://mateobedoya.app.n8n.cloud/webhook/9129b2c9-c591-40d0-9955-5cda85c06ad9/chat',
+    	initialMessages: [
+    		'¡Hola! 👋',
+    		'¡Cómo puedo ayudarte hoy?'
+    	],
+    	i18n: {
+    		en: {
+    			title: '¡Hola! 👋',
+    			subtitle: "Empieza una nueva conversación.",
+    			footer: '',
+    			getStarted: 'Nueva conversación',
+    			inputPlaceholder: 'Escribe tu pregunta...',
+    		},
+    	}
   	});
   </script>
   <div class="page">
