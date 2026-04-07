@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es" data-current-lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>PNB Digital - Cotización Dossiers 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary: #002473;
+      --primary-light: #3558b3;
+      --accent: #00c4a7;
+      --bg-gradient-start: #07112b;
+      --bg-gradient-end: #02030a;
+      --card-bg: #0b1020;
+      --card-border: #1d2340;
+      --text-main: #f5f7fb;
+      --text-muted: #9ba4c4;
+      --divider: #27324a;
+      --shadow-soft: 0 30px 80px rgba(0, 0, 0, 0.75);
+      --radius-xl: 26px;
+      --transition-fast: 0.2s ease;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, var(--bg-gradient-start), var(--bg-gradient-end));
+      min-height: 100vh;
+      padding: 32px 12px;
+      display: flex;
+      justify-content: center;
+      color: var(--text-main);
+    }
+
+    .page {
+      width: 100%;
+      max-width: var(--max-width);
+      background:
+        radial-gradient(circle at top left, rgba(0, 196, 167, 0.10), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(53, 88, 179, 0.18), transparent 60%),
+        var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-soft);
+      padding: 28px 30px 26px;
+    }
+
+    /* HEADER SUPERIOR */
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 25% 10%, var(--accent), var(--primary));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 18px 40px rgba(0, 196, 167, 0.4);
+    }
+
+    .brand-text-main {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 6px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(116, 132, 194, 0.9);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      background: rgba(6, 11, 40, 0.96);
+    }
+
+    /* TOGGLE IDIOMA */
+
+    .lang-toggle {
+      display: inline-flex;
+      padding: 2px;
+      border-radius: 999px;
+      border: 1px solid rgba(120, 137, 205, 0.85);
+      background: rgba(5, 10, 34, 0.9);
+      gap: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .lang-btn span.flag {
+      font-size: 14px;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(120deg, var(--primary-light), var(--accent));
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .lang-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* TITULOS PRINCIPALES */
+
+    .title-block {
+      margin-bottom: 22px;
+    }
+
+    .title-main {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .title-sub {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* FILA CLIENTE / CONSULTOR / FECHA / BOTONES */
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .meta-block {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .meta-label {
+      margin-bottom: 4px;
+    }
+
+    .meta-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-secondary {
+      border-color: rgba(120, 136, 200, 0.8);
+      background: rgba(8, 14, 44, 0.9);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      border-color: rgba(144, 160, 220, 0.95);
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), #00d5b6);
+      color: #021019;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(0, 196, 167, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 196, 167, 0.6);
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--divider);
+      margin: 12px 0 20px;
+    }
+
+    /* SECCIONES NUMERADAS */
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-number {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--primary-light), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #021019;
+      flex-shrink: 0;
+      box-shadow: 0 10px 24px rgba(0, 196, 167, 0.35);
+    }
+
+    .section-title {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .section-body p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 4px 0 8px;
+    }
+
+    li {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* TABLAS BONITAS */
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 6px;
+      font-size: 12px;
+    }
+
+    .info-table thead {
+      background: rgba(7, 14, 44, 0.95);
+    }
+
+    .info-table th,
+    .info-table td {
+      border-bottom: 1px solid rgba(51, 64, 110, 0.9);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .info-table th {
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+    .info-table td {
+      color: var(--text-muted);
+    }
+
+    .info-table tr:nth-child(even) td {
+      background: rgba(8, 13, 40, 0.75);
+    }
+
+    .info-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* MULTI-IDIOMA */
+
+    [data-lang],
+    [data-lang-block] {
+      display: none;
+    }
+
+    html[data-current-lang="es"] [data-lang="es"],
+    html[data-current-lang="en"] [data-lang="en"] {
+      display: inline;
+    }
+
+    html[data-current-lang="es"] [data-lang-block="es"],
+    html[data-current-lang="en"] [data-lang-block="en"] {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        padding: 22px 16px 18px;
+      }
+      .meta-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: auto;
+      }
+      .actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .chip-row {
+        align-items: flex-start;
+      }
+      .title-main,
+      .title-sub {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <div class="top-row">
+      <div class="brand">
+        <div class="brand-icon">P</div>
+        <div>
+          <div class="brand-text-main">PNB DIGITAL</div>
+          <div class="brand-text-sub" data-lang="es">Data &amp; Automation Consulting</div>
+          <div class="brand-text-sub" data-lang="en">Data &amp; Automation Consulting</div>
+        </div>
+      </div>
+
+      <div class="chip-row">
+        <div class="chip">
+          <span data-lang="es">COTIZACIÓN · POWER BI · SHAREPOINT</span>
+          <span data-lang="en">QUOTATION · POWER BI · SHAREPOINT</span>
+        </div>
+
+        <!-- TOGGLE IDIOMA -->
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" data-set-lang="es">
+            <span class="flag">🇪🇸</span> ES
+          </button>
+          <button class="lang-btn" data-set-lang="en">
+            <span class="flag">🇺🇸</span> EN
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TITULO PRINCIPAL -->
+    <div class="title-block">
+      <div class="title-main">
+        <span data-lang="es">Cotización – Desarrollo de Tablero Power BI</span>
+        <span data-lang="en">Quotation – Power BI Dashboard Development</span>
+      </div>
+      <div class="title-sub">
+        <span data-lang="es">Dossiers 2025</span>
+        <span data-lang="en">Dossiers 2025</span>
+      </div>
+    </div>
+
+    <!-- META + BOTONES -->
+    <div class="meta-row">
+      <div class="meta-block">
+        <div class="meta-label">
+          <span data-lang="es">Cliente</span>
+          <span data-lang="en">Client</span>
+        </div>
+        <div class="meta-value">GEA S.A.S.</div>
+      </div>
+
+      <div class="meta-block">
+        <div class="meta-label">
+          <span data-lang="es">Consultor</span>
+          <span data-lang="en">Consultant</span>
+        </div>
+        <div class="meta-value">Diego Paz</div>
+      </div>
+
+      <div class="meta-block">
+        <div class="meta-label">
+          <span data-lang="es">Fecha</span>
+          <span data-lang="en">Date</span>
+        </div>
+        <div class="meta-value">
+          <span data-lang="es">21 de octubre de 2025</span>
+          <span data-lang="en">October 21, 2025</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary">
+          <span data-lang="es">Vista previa</span>
+          <span data-lang="en">Preview</span>
+        </button>
+        <button class="btn btn-primary" onclick="window.print()">
+          <span data-lang="es">Imprimir / Guardar PDF</span>
+          <span data-lang="en">Print / Save PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 1. DESCRIPCIÓN DEL SERVICIO -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">
+          <span data-lang="es">Descripción del servicio</span>
+          <span data-lang="en">Service description</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <p data-lang-block="es">
+          Desarrollo de un tablero en Power BI para el seguimiento y control integral de los
+          <span class="highlight">Dossiers 2025</span>, alojados en SharePoint, que permita trazabilidad de documentos,
+          monitoreo de estatus de revisión y evaluación de avance por campo, contratista y actividad.
+        </p>
+        <p data-lang-block="es">
+          El tablero ofrecerá una vista consolidada con KPIs, gráficos y análisis de evolución temporal, facilitando
+          la gestión y control de los procesos asociados a la documentación técnica.
+        </p>
+
+        <p data-lang-block="en">
+          Development of a Power BI dashboard for the end-to-end monitoring and control of
+          <span class="highlight">Dossiers 2025</span>, stored in SharePoint, enabling document traceability,
+          review-status monitoring, and progress evaluation by field, contractor, and activity.
+        </p>
+        <p data-lang-block="en">
+          The dashboard will provide a consolidated view with KPIs, charts, and time-series analysis, facilitating
+          the management and control of all processes related to the technical documentation.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. ALCANCE -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div class="section-title">
+          <span data-lang="es">Alcance</span>
+          <span data-lang="en">Scope</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul data-lang-block="es">
+          <li>Conexión y extracción de metadatos desde SharePoint (carpeta <em>'Dossiers 2025'</em>).</li>
+          <li>Modelado jerárquico de carpetas (Campo → Contratista → Actividad → Documento).</li>
+          <li>Exclusión de usuarios internos de modificaciones.</li>
+          <li>Cálculo de métricas clave: % de aprobación, % en proceso, % rechazados.</li>
+          <li>Visualizaciones interactivas con KPIs, tendencias y timeline.</li>
+          <li>Refresh automático según ventana y frecuencia acordada con el cliente.</li>
+          <li>Documentación técnica básica y guía de uso final.</li>
+        </ul>
+
+        <ul data-lang-block="en">
+          <li>Connection and metadata extraction from SharePoint (folder <em>'Dossiers 2025'</em>).</li>
+          <li>Hierarchical modeling of the folder structure (Field → Contractor → Activity → Document).</li>
+          <li>Exclusion of internal users from the modification analysis.</li>
+          <li>Computation of key metrics: approval %, in-progress %, rejected %.</li>
+          <li>Interactive visualizations with KPIs, trends, and timeline.</li>
+          <li>Automatic refresh according to the window and frequency agreed with the client.</li>
+          <li>Basic technical documentation and final user guide.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. ENTREGABLES (TABLITA) -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div class="section-title">
+          <span data-lang="es">Entregables</span>
+          <span data-lang="en">Deliverables</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <table class="info-table" data-lang-block="es">
+          <thead>
+            <tr>
+              <th>Ítem</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tablero Power BI</td>
+              <td>Archivo <strong>.pbix</strong> con modelo de datos y reporte principal de Dossiers 2025.</td>
+            </tr>
+            <tr>
+              <td>Publicación</td>
+              <td>Publicación del reporte en Power BI Service, en el espacio de trabajo definido por GEA.</td>
+            </tr>
+            <tr>
+              <td>Guía rápida</td>
+              <td>Documento PDF de uso y navegación del tablero.</td>
+            </tr>
+            <tr>
+              <td>Sesión de socialización</td>
+              <td>Sesión virtual (hasta 2 horas) para explicación funcional y resolución de dudas.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="info-table" data-lang-block="en">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Power BI dashboard</td>
+              <td><strong>.pbix</strong> file with the data model and the main Dossiers 2025 report.</td>
+            </tr>
+            <tr>
+              <td>Publication</td>
+              <td>Report published to Power BI Service in the workspace defined by GEA.</td>
+            </tr>
+            <tr>
+              <td>Quick guide</td>
+              <td>PDF document describing how to use and navigate the dashboard.</td>
+            </tr>
+            <tr>
+              <td>Handover session</td>
+              <td>Virtual session (up to 2 hours) to explain functionality and answer questions.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. TIEMPO ESTIMADO -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div class="section-title">
+          <span data-lang="es">Tiempo estimado de ejecución</span>
+          <span data-lang="en">Estimated timeline</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <table class="info-table" data-lang-block="es">
+          <thead>
+            <tr>
+              <th>Fase</th>
+              <th>Duración estimada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Levantamiento y conexión a SharePoint</td>
+              <td>3 – 4 días hábiles</td>
+            </tr>
+            <tr>
+              <td>Modelado de datos y KPIs</td>
+              <td>5 – 7 días hábiles</td>
+            </tr>
+            <tr>
+              <td>Construcción de visualizaciones</td>
+              <td>4 – 5 días hábiles</td>
+            </tr>
+            <tr>
+              <td>Pruebas, ajustes y socialización</td>
+              <td>3 – 4 días hábiles</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="info-table" data-lang-block="en">
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Estimated duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Requirements &amp; SharePoint connection</td>
+              <td>3 – 4 business days</td>
+            </tr>
+            <tr>
+              <td>Data modeling &amp; KPIs</td>
+              <td>5 – 7 business days</td>
+            </tr>
+            <tr>
+              <td>Visual design &amp; build</td>
+              <td>4 – 5 business days</td>
+            </tr>
+            <tr>
+              <td>Testing, refinements &amp; handover</td>
+              <td>3 – 4 business days</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="footnote" data-lang-block="es">
+          El cronograma total se estima entre <strong>3 y 4 semanas</strong>, sujeto a la disponibilidad de accesos y
+          definiciones de negocio por parte de GEA.
+        </p>
+        <p class="footnote" data-lang-block="en">
+          The overall timeline is estimated at <strong>3 to 4 weeks</strong>, subject to access availability and
+          business definitions provided by GEA.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. INVERSIÓN -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div class="section-title">
+          <span data-lang="es">Inversión</span>
+          <span data-lang="en">Investment</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <table class="info-table" data-lang-block="es">
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Honorarios de consultoría</td>
+              <td>[Valor en COP/USD a definir con GEA]. Incluye análisis, modelado, desarrollo, pruebas y socialización.</td>
+            </tr>
+            <tr>
+              <td>Licenciamiento</td>
+              <td>Licencias de Power BI / Microsoft 365 no están incluidas en este valor.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="info-table" data-lang-block="en">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Consulting fees</td>
+              <td>[Amount in COP/USD to be agreed with GEA]. Includes analysis, modeling, development, testing and handover.</td>
+            </tr>
+            <tr>
+              <td>Licensing</td>
+              <td>Power BI / Microsoft 365 licenses are not included in this amount.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 6. SUPUESTOS Y EXCLUSIONES RESUMIDOS -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <div class="section-title">
+          <span data-lang="es">Supuestos y exclusiones</span>
+          <span data-lang="en">Assumptions &amp; exclusions</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <ul data-lang-block="es">
+          <li>GEA suministra accesos a SharePoint y Power BI Service.</li>
+          <li>Los datos en SharePoint se consideran la fuente oficial del tablero.</li>
+          <li>Automatizaciones adicionales (Power Automate, integraciones con otros sistemas) no están incluidas.</li>
+        </ul>
+
+        <ul data-lang-block="en">
+          <li>GEA provides access to SharePoint and Power BI Service.</li>
+          <li>The data stored in SharePoint is considered the official source for the dashboard.</li>
+          <li>Additional automations (Power Automate, integrations with other systems) are not included.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. CIERRE -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">7</div>
+        <div class="section-title">
+          <span data-lang="es">Cierre y aceptación</span>
+          <span data-lang="en">Closing &amp; acceptance</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <p data-lang-block="es">
+          En caso de aceptación de esta propuesta, se confirmará el alcance final, se ajustará el cronograma si es
+          necesario y se definirá la fecha de inicio del proyecto.
+        </p>
+        <p data-lang-block="en">
+          If this proposal is accepted, the final scope will be confirmed, the timeline will be adjusted if needed,
+          and a project start date will be agreed.
+        </p>
+      </div>
+    </section>
+
+    <!-- FIRMAS -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">8</div>
+        <div class="section-title">
+          <span data-lang="es">Firmas</span>
+          <span data-lang="en">Signatures</span>
+        </div>
+      </div>
+      <div class="section-body">
+        <table class="info-table" data-lang-block="es">
+          <tbody>
+            <tr>
+              <td style="width:40%">Por PNB Digital</td>
+              <td>_______________________________<br/>Diego Paz – Consultor en Analítica de Datos &amp; BI</td>
+            </tr>
+            <tr>
+              <td>Por GEA S.A.S.</td>
+              <td>_______________________________<br/>Nombre / Cargo</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="info-table" data-lang-block="en">
+          <tbody>
+            <tr>
+              <td style="width:40%">On behalf of PNB Digital</td>
+              <td>_______________________________<br/>Diego Paz – Data Analytics &amp; BI Consultant</td>
+            </tr>
+            <tr>
+              <td>On behalf of GEA S.A.S.</td>
+              <td>_______________________________<br/>Name / Position</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="footnote" data-lang-block="es">
+      Nota: Los valores indicados están sujetos a validación final con el cliente y pueden ajustarse según cambios en
+      el alcance o requerimientos adicionales.
+    </p>
+    <p class="footnote" data-lang-block="en">
+      Note: The amounts indicated are subject to final validation with the client and may be adjusted depending on
+      scope changes or additional requirements.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const buttons = document.querySelectorAll(".lang-btn");
+
+      function setLang(lang) {
+        html.setAttribute("data-current-lang", lang);
+        buttons.forEach(btn => {
+          const isActive = btn.getAttribute("data-set-lang") === lang;
+          btn.classList.toggle("active", isActive);
+        });
+        try {
+          localStorage.setItem("pnb_lang", lang);
+        } catch (e) {}
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const lang = btn.getAttribute("data-set-lang");
+          setLang(lang);
+        });
+      });
+
+      let initial = "es";
+      try {
+        const saved = localStorage.getItem("pnb_lang");
+        if (saved === "es" || saved === "en") initial = saved;
+      } catch (e) {}
+
+      setLang(initial);
+    })();
+  </script>
+</body>
+</html>
