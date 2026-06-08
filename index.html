@@ -75,6 +75,7 @@
       display: flex;
       gap: 18px;
       font-size: 0.95rem;
+      align-items: center;
     }
 
     nav a {
@@ -446,24 +447,12 @@
 </head>
 <body>
   <script type="module">
-  	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-  
-  	createChat({
-  		webhookUrl: 'https://mateobedoya.app.n8n.cloud/webhook/9129b2c9-c591-40d0-9955-5cda85c06ad9/chat',
-    	initialMessages: [
-    		'¡Hola! 👋',
-    		'¡Cómo puedo ayudarte hoy?'
-    	],
-    	i18n: {
-    		en: {
-    			title: '¡Hola! 👋',
-    			subtitle: "Empieza una nueva conversación.",
-    			footer: '',
-    			getStarted: 'Nueva conversación',
-    			inputPlaceholder: 'Escribe tu pregunta...',
-    		},
-    	}
-  	});
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://mateobedoya.app.n8n.cloud/webhook/9129b2c9-c591-40d0-9955-5cda85c06ad9/chat',
+      initialMessages: ['¡Hola! 👋','¡Cómo puedo ayudarte hoy?'],
+      i18n: { en: { title: '¡Hola! 👋', subtitle: "Empieza una nueva conversación.", footer: '', getStarted: 'Nueva conversación', inputPlaceholder: 'Escribe tu pregunta...', } }
+    });
   </script>
   <div class="page">
     <header>
@@ -480,6 +469,11 @@
         <a href="#projects">Use cases</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="TU_URL_APPS_SCRIPT" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;border:1px solid rgba(0,196,167,.3);color:var(--accent);font-size:0.85rem;">
+          Portfolio
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
       </nav>
     </header>
 
@@ -492,10 +486,7 @@
             <span>From raw data to clear decisions</span>
           </div>
 
-          <h1>
-            We design <span>analytics</span> that people
-            actually use.
-          </h1>
+          <h1>We design <span>analytics</span> that people actually use.</h1>
 
           <p class="hero-subtitle">
             PNB Digital helps teams transform spreadsheets, databases and manual
@@ -509,7 +500,6 @@
             <button class="btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'});">
               See what we build
             </button>
-            <!-- NEW BUTTON TO ANALYTICS DASHBOARD -->
             <a href="/analytics/" class="btn-ghost">
               View analytics dashboard
             </a>
@@ -522,13 +512,11 @@
           </div>
         </div>
 
-        <!-- Hero side card -->
         <aside class="hero-card">
           <div class="hero-card-title">
             <strong>Executive snapshot</strong>
             <span class="hero-chip">PNB Digital</span>
           </div>
-
           <div class="kpi-grid">
             <div class="kpi">
               <div class="kpi-label">Time to insight</div>
@@ -546,13 +534,9 @@
               <div class="kpi-pill">Areas aligned on one single source of truth.</div>
             </div>
           </div>
-
           <div class="stack">
-            <span>Power BI</span>
-            <span>SQL / Python</span>
-            <span>Power Apps</span>
-            <span>Power Automate</span>
-            <span>Azure / Cloud</span>
+            <span>Power BI</span><span>SQL / Python</span><span>Power Apps</span>
+            <span>Power Automate</span><span>Azure / Cloud</span>
           </div>
         </aside>
       </section>
@@ -560,101 +544,54 @@
       <!-- SERVICES -->
       <section id="services">
         <h2 class="section-title">Services</h2>
-        <p class="section-subtitle">
-          We mix strategy, design and engineering so your dashboards feel clear,
-          fast and aligned with the business.
-        </p>
-
+        <p class="section-subtitle">We mix strategy, design and engineering so your dashboards feel clear, fast and aligned with the business.</p>
         <div class="cards">
           <article class="card">
             <div class="card-tag">Analytics</div>
             <h3>Executive dashboards in Power BI</h3>
-            <p>
-              End-to-end design of reporting for management, finance, sales or
-              operations.
-            </p>
-            <ul>
-              <li>Modeling data from different systems.</li>
-              <li>KPIs & storytelling for decision makers.</li>
-              <li>Governance, security and documentation.</li>
-            </ul>
+            <p>End-to-end design of reporting for management, finance, sales or operations.</p>
+            <ul><li>Modeling data from different systems.</li><li>KPIs & storytelling for decision makers.</li><li>Governance, security and documentation.</li></ul>
           </article>
-
           <article class="card">
             <div class="card-tag">Automation</div>
             <h3>Apps & workflows for your team</h3>
-            <p>
-              Replace spreadsheets and manual steps with apps and flows.
-            </p>
-            <ul>
-              <li>Request & approval apps (Power Apps).</li>
-              <li>Automated flows, alerts and emails.</li>
-              <li>Integration with SharePoint, SQL, APIs.</li>
-            </ul>
+            <p>Replace spreadsheets and manual steps with apps and flows.</p>
+            <ul><li>Request & approval apps (Power Apps).</li><li>Automated flows, alerts and emails.</li><li>Integration with SharePoint, SQL, APIs.</li></ul>
           </article>
-
           <article class="card">
             <div class="card-tag">AI & data</div>
             <h3>Data foundations for AI</h3>
-            <p>
-              Prepare your data so you can safely use AI and copilots.
-            </p>
-            <ul>
-              <li>Cleaning and structuring historical data.</li>
-              <li>Data quality checks & monitoring.</li>
-              <li>Practical AI use-cases for your context.</li>
-            </ul>
+            <p>Prepare your data so you can safely use AI and copilots.</p>
+            <ul><li>Cleaning and structuring historical data.</li><li>Data quality checks & monitoring.</li><li>Practical AI use-cases for your context.</li></ul>
           </article>
-
           <article class="card">
             <div class="card-tag">Enablement</div>
             <h3>Training for analysts & leaders</h3>
-            <p>
-              Short, focused sessions to help your team read, trust and improve
-              their own analytics.
-            </p>
-            <ul>
-              <li>Power BI for business users.</li>
-              <li>Best practices for self-service BI.</li>
-              <li>1:1 mentoring for internal champions.</li>
-            </ul>
+            <p>Short, focused sessions to help your team read, trust and improve their own analytics.</p>
+            <ul><li>Power BI for business users.</li><li>Best practices for self-service BI.</li><li>1:1 mentoring for internal champions.</li></ul>
           </article>
         </div>
       </section>
 
-      <!-- PROJECTS / USE CASES -->
+      <!-- PROJECTS -->
       <section id="projects">
         <h2 class="section-title">Sample use-cases</h2>
-        <p class="section-subtitle">
-          A few examples of the type of problems we like to solve.
-        </p>
-
+        <p class="section-subtitle">A few examples of the type of problems we like to solve.</p>
         <div class="cards">
           <article class="card">
             <div class="card-tag">Operations</div>
             <h3>Performance tracking for production line</h3>
-            <p>
-              Flow, downtime, maintenance and quality dashboards connected to
-              your MES or SCADA.
-            </p>
+            <p>Flow, downtime, maintenance and quality dashboards connected to your MES or SCADA.</p>
           </article>
-
           <article class="card">
             <div class="card-tag">Finance</div>
             <h3>Profitability & workload analytics</h3>
-            <p>
-              View workload, billing and forecast per client, project, cluster
-              or BU in a single report.
-            </p>
+            <p>View workload, billing and forecast per client, project, cluster or BU in a single report.</p>
           </article>
-
           <article class="card">
             <div class="card-tag">Compliance</div>
             <h3>Environmental & risk dashboards</h3>
-            <p>
-              Track indicators, alerts and action plans for quality, risk and
-              environmental management.
-            </p>
+            <p>Track indicators, alerts and action plans for quality, risk and environmental management.</p>
           </article>
         </div>
       </section>
@@ -663,18 +600,8 @@
       <section id="about" class="two-col">
         <div class="about-text">
           <h2 class="section-title">Why PNB Digital?</h2>
-          <p>
-            We combine engineering, analytics and real business experience. We
-            are used to working with complex realities: different systems,
-            manual processes and teams that are just starting their data
-            journey.
-          </p>
-          <p>
-            Every project is built thinking about adoption: clear KPIs, simple
-            filters, concise views and documentation so your team can own the
-            solution.
-          </p>
-
+          <p>We combine engineering, analytics and real business experience. We are used to working with complex realities: different systems, manual processes and teams that are just starting their data journey.</p>
+          <p>Every project is built thinking about adoption: clear KPIs, simple filters, concise views and documentation so your team can own the solution.</p>
           <div class="about-highlights">
             <span>Power Platform ecosystem</span>
             <span>Spanish & English delivery</span>
@@ -683,76 +610,23 @@
         </div>
 
         <div id="contact" class="contact-box">
-          <h2 class="section-title">Let’s talk</h2>
-          <p>
-            Share a bit about your context and we’ll get back to you with ideas
-            for a quick win and a possible roadmap.
-          </p>
-
-          <!-- FORM: visual for now, then we can wire it to send emails -->
-          <form
-            id="contact-form"
-            action="https://formspree.io/f/xkgkyerz"
-            method="POST"
-          >
-            <input
-              type="hidden"
-              name="_next"
-              value="https://pnbdigital.com/thanks.html"
-            />
-            <div>
-              <label for="name">Name</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Your name"
-                required
-              />
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@company.com"
-                required
-              />
-            </div>
-            <div>
-              <label for="message">Tell us about your project</label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Short description, goals, systems involved..."
-                required
-              ></textarea>
-            </div>
-
-            <!-- Optional: custom subject for the email -->
-            <input
-              type="hidden"
-              name="_subject"
-              value="New contact from pnbdigital.com"
-            />
-
-            <button type="submit" class="btn-main">
-              Send
-            </button>
-
-            <div class="form-note">
-              After you send this form you will be redirected to a thank you page.
-            </div>
+          <h2 class="section-title">Let's talk</h2>
+          <p>Share a bit about your context and we'll get back to you with ideas for a quick win and a possible roadmap.</p>
+          <form id="contact-form" action="https://formspree.io/f/xkgkyerz" method="POST">
+            <input type="hidden" name="_next" value="https://pnbdigital.com/thanks.html" />
+            <div><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
+            <div><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@company.com" required /></div>
+            <div><label for="message">Tell us about your project</label><textarea id="message" name="message" placeholder="Short description, goals, systems involved..." required></textarea></div>
+            <input type="hidden" name="_subject" value="New contact from pnbdigital.com" />
+            <button type="submit" class="btn-main">Send</button>
+            <div class="form-note">After you send this form you will be redirected to a thank you page.</div>
           </form>
-
         </div>
       </section>
     </main>
 
     <footer>
-      © <span id="year"></span> PNB Digital. Built with data, coffee and a bit of
-      code.
+      © <span id="year"></span> PNB Digital. Built with data, coffee and a bit of code.
     </footer>
   </div>
 
