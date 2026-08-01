@@ -65,12 +65,6 @@
       /* Action Icons (Send and File Upload) */
       --chat--input--send--button--color: var(--accent);    /* The 'Send' arrow icon is vibrant teal */
       --chat--input--file--button--color: var(--accent);    /* The 'File Upload' paperclip icon is teal */
-      
-      --chat--input--send--button--background: transparent;
-      --chat--input--send--button--background-hover: var(--card-bg);
-      
-      --chat--input--file--button--background: transparent;
-      --chat--input--file--button--background-hover: var(--card-bg);
     }
 
     * {
@@ -504,8 +498,8 @@
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
     createChat({
       webhookUrl: 'https://pnbdigital.app.n8n.cloud/webhook/ecb21666-fecf-498f-9eff-e7ca2421a4d0/chat',
-      initialMessages: ['¡Hi! 👋','What kind of solution are you dreaming of today? Ask me about your needs so we can find the best options for you'],
-      i18n: { en: { title: '¡Hi! 👋', subtitle: "Start a new chat.", getStarted: 'New chat', inputPlaceholder: 'Write your message!', } }
+      initialMessages: ['Hi! 👋','What kind of solution are you dreaming of today? Ask me about your needs so we can find the best options for you'],
+      i18n: { en: { title: 'Hi! 👋', subtitle: "Start a new chat.", getStarted: 'New chat', inputPlaceholder: 'Write your message!', } }
     });
   </script>
   <div class="page">
