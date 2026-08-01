@@ -9,14 +9,62 @@
 
   <style>
     :root {
+      /* ========================================================
+         WEBSITE BRAND VARIABLES
+         ======================================================== */
       --primary: #002473;
       --primary-light: #3558b3;
-      --accent: #00c4a7;
+      --accent: #00c4a7; /* This is the key vibrant teal action color */
       --bg: #050816;
       --text: #f5f7fb;
       --muted: #9ba4c4;
       --card-bg: #0b1020;
       --border: #1d2340;
+  
+      /* ========================================================
+         N8N CHAT WIDGET CUSTOMIZATION VARIABLES
+         ======================================================== */
+      
+      /* 🎨 Primary Brand/Launcher Colors */
+      --chat--color--primary: var(--accent);                /* Launcher button background and key active elements */
+      --chat--color--primary-shade-50: #00a58e;            /* Hover state for primary actions (slightly darker teal) */
+      --chat--color--primary--shade-100: #008d79;           /* Active state (even darker teal) */
+      --chat--color-white: #ffffff;                        /* We need pure white for text contrast on the teal bubble */
+  
+      /* 📏 Base Layout and Borders */
+      --chat--border-radius: 0.5rem;                        /* Slightly modern curved corners (e.g., 8px) */
+      --chat--window--border: 1px solid var(--border);    /* Subtle dark border for the chat window */
+      --chat--window--box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Add depth on dark background */
+      --chat--font-family: 'Inter', sans-serif;             /* Replace with your exact font if different */
+  
+      /* 💬 Message Bubble Styling (Fixing the dark theme) */
+      /* Bot Messages (Received) */
+      --chat--message--bot--background: var(--card-bg);    /* Dark blue/gray background, not white */
+      --chat--message--bot--color: var(--text);             /* Light text on dark background */
+      
+      /* User Messages (Sent) */
+      --chat--message--user--background: var(--accent);     /* Vibrate brand teal background */
+      --chat--message--user--color: var(--chat--color-white); /* White text for maximum legibility */
+  
+      /* 🔘 Header Styles */
+      --chat--header--background: var(--primary);           /* Deep brand blue for the header */
+      --chat--header--color: var(--text);                  /* Light title/close icon text */
+      --chat--close--button--color-hover: var(--accent);    /* Close icon turns teal on hover */
+  
+      /* ⌨️ Body, Footer, and Input Area */
+      --chat--body--background: var(--bg);                 /* Main chat window is seamless with the webpage */
+      --chat--footer--background: var(--bg);               /* Input area merges with the body */
+      --chat--footer--color: var(--text);                  /* Footer label text */
+  
+      /* Input Text Box (where the user types) */
+      --chat--input--background: var(--card-bg);           /* Dark blue background for the input box */
+      --chat--input--text-color: var(--text);              /* Text typed by the user */
+      --chat--input--placeholder--font-size: 1rem;
+      --chat--textarea--border: 1px solid var(--border);   /* Subtle border around the text box */
+  
+      /* Action Icons (Send and File Upload) */
+      --chat--input--send--button--color: var(--accent);    /* The 'Send' arrow icon is vibrant teal */
+      --chat--input--file--button--color: var(--accent);    /* The 'File Upload' paperclip icon is teal */
     }
 
     * {
